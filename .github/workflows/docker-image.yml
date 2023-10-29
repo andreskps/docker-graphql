@@ -37,9 +37,12 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
     - name: Build the Docker image
-      run: docker build --tag pipekps/docker-graphql:${{ steps.version.outputs.version }} .
-           docker build --tag pipekps/docker-graphql:latest .
+      run: |
+          docker build -t pipekps/docker-graphql:${{ steps.version.outputs.version }} .
+          docker build -t pipekps/docker-graphql:latest .
       
     - name: Push the Docker image
-      run: docker push pipekps/docker-graphql:${{ steps.version.outputs.version }}
-           docker push pipekps/docker-graphql:latest
+      run: |
+          docker push pipekps/docker-graphql:${{ steps.version.outputs.version }}
+          docker push pipekps/docker-graphql:latest
+ 
